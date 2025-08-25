@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #121a2b;
+      --text: #e6eefc;
+      --muted: #a9b5d1;
+      --accent: #7aa2ff;
+      --chip: #1b2844;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% -10%, #1a2550, transparent), var(--bg);
+      color: var(--text);
+    }
+    .container { max-width: 980px; margin: 0 auto; padding: 32px 20px 60px; }
+    header { display:flex; align-items:center; gap:18px; margin: 12px 0 24px; }
+    .avatar { width:72px; height:72px; border-radius:50%; border:2px solid rgba(255,255,255,.12); box-shadow: var(--shadow); object-fit: cover; }
+    .title h1 { font-size: clamp(22px, 4vw, 34px); margin:0; letter-spacing:.3px; }
+    .title p { margin:6px 0 0; color: var(--muted); }
+
+    .panel { background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 80%), var(--panel); border:1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .grid { display:grid; gap: 18px; grid-template-columns: 1.2fr .8fr; }
+    @media (max-width:900px){ .grid { grid-template-columns: 1fr; } }
+
+    h2 { font-size: 18px; margin: 0 0 10px; letter-spacing:.2px; }
+    p { line-height: 1.6; }
+
+    .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px; }
+    .chip { background: var(--chip); color: var(--text); padding: 8px 12px; border-radius: 999px; font-size: 13px; border:1px solid rgba(255,255,255,.08); }
+
+    .links { display:flex; flex-wrap:wrap; gap: 10px; margin-top: 14px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; text-decoration:none; padding: 10px 14px; border-radius: 12px; border:1px solid rgba(255,255,255,.12); background: #0f1729; color: var(--text); box-shadow: var(--shadow); transition: transform .12s ease; }
+    .btn:hover { transform: translateY(-2px); }
+
+    .list { display:grid; gap: 12px; margin-top: 8px; }
+    .item { padding: 12px; border-radius: 12px; border:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02); }
+    .item strong { display:block; margin-bottom: 4px; }
+
+    footer { margin-top: 28px; color: var(--muted); font-size: 13px; text-align:center; }
+    code.inline { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 6px; border:1px solid rgba(255,255,255,.08); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img id="avatar" class="avatar" alt="avatar" />
+      <div class="title">
+        <h1 id="name">Your Name</h1>
+        <p id="tagline">Short tagline goes here</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>About Me</h2>
+        <p id="about"></p>
+
+        <h2>Skills</h2>
+        <div id="skills" class="chips"></div>
+
+        <h2>Projects</h2>
+        <div id="projects" class="list"></div>
+      </section>
+
+      <aside class="panel">
+        <h2>Contact</h2>
+        <div class="links" id="links"></div>
+
+        <h2>Details</h2>
+        <div class="list" id="details"></div>
+      </aside>
+    </div>
+
+    <footer>
+      Built with <code class="inline">HTML</code>, <code class="inline">CSS</code> & <code class="inline">JavaScript</code> — deploy on GitHub Pages.
+    </footer>
+  </div>
+
+  <script>
+    // --- EDIT THESE FIELDS ---
+    const data = {
+      name: "Sindhura Ghanta",
+      tagline: "MS student • Full‑stack & ML enthusiast",
+      avatar: "https://avatars.githubusercontent.com/u/9919?s=140", // replace with your image URL
+      about: `I'm a graduate student who loves building end‑to‑end apps — from fast APIs to clean UIs. Recently I've been exploring
+              ML for audio/visual sync and deploying lightweight demos.`,
+      skills: ["JavaScript", "Python", "FastAPI", "React", "Pandas", "NumPy", "SQL"],
+      links: [
+        { label: "GitHub", href: "https://github.com/your-username" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle/" },
+        { label: "Email", href: "mailto:you@example.com" }
+      ],
+      details: [
+        { k: "Location", v: "Charlotte, NC" },
+        { k: "Currently", v: "Building a lip‑sync demo" },
+        { k: "Looking for", v: "TA/RA or internship roles" }
+      ],
+      projects: [
+        { name: "Wav2Lip Web App", desc: "Streamlit app with login & file uploads to sync lip movement to speech.", url: "#" },
+        { name: "FastAPI Orders API", desc: "CRUD service using SQLAlchemy & JWT auth.", url: "#" }
+      ]
+    };
+
+    // --- RENDER LOGIC ---
+    const el = (tag, attrs = {}, children = []) => {
+      const node = document.createElement(tag);
+      Object.entries(attrs).forEach(([k,v]) => {
+        if (k === 'class') node.className = v; else if (k === 'html') node.innerHTML = v; else node.setAttribute(k, v);
+      });
+      ([]).concat(children).forEach(child => node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child));
+      return node;
+    };
+
+    // Fill top section
+    document.getElementById('name').textContent = data.name;
+    document.getElementById('tagline').textContent = data.tagline;
+    document.getElementById('avatar').src = data.avatar;
+    document.getElementById('about').textContent = data.about;
+
+    // Skills chips
+    const skillsWrap = document.getElementById('skills');
+    data.skills.forEach(s => skillsWrap.appendChild(el('span', { class: 'chip' }, s)));
+
+    // Links
+    const linksWrap = document.getElementById('links');
+    data.links.forEach(l => linksWrap.appendChild(el('a', { class: 'btn', href: l.href, target: '_blank', rel: 'noopener' }, [
+      el('span', {}, l.label)
+    ])));
+
+    // Details list
+    const detailsWrap = document.getElementById('details');
+    data.details.forEach(d => detailsWrap.appendChild(el('div', { class: 'item' }, [
+      el('strong', {}, d.k),
+      el('span', {}, d.v)
+    ])));
+
+    // Projects list
+    const projectsWrap = document.getElementById('projects');
+    data.projects.forEach(p => projectsWrap.appendChild(el('a', { class: 'item', href: p.url, target: '_blank', rel: 'noopener' }, [
+      el('strong', {}, p.name),
+      el('span', {}, p.desc)
+    ])));
+  </script>
+</body>
+</html>
