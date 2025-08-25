@@ -67,9 +67,6 @@
 
         <h2>Skills</h2>
         <div id="skills" class="chips"></div>
-
-        <h2>Projects</h2>
-        <div id="projects" class="list"></div>
       </section>
 
       <aside class="panel">
@@ -90,11 +87,15 @@
     // --- EDIT THESE FIELDS ---
     const data = {
       name: "Sindhura Ghanta",
-      tagline: "MS student • Full‑stack & ML enthusiast",
-      avatar: "https://avatars.githubusercontent.com/u/9919?s=140", // replace with your image URL
-      about: `I'm a graduate student who loves building end‑to‑end apps — from fast APIs to clean UIs. Recently I've been exploring
-              ML for audio/visual sync and deploying lightweight demos.`,
-      skills: ["JavaScript", "Python", "FastAPI", "React", "Pandas", "NumPy", "SQL"],
+      tagline: "MS in Computer Science • UNCC",
+      avatar: "blob:https://web.whatsapp.com/d8a710ef-b8a7-4d59-9abe-64755c1b3839", // replace with your image URL
+      about: `I am a Master's student in Computer Science at the University of North Carolina at Charlotte. 
+              I like investing my time in full-stack development, data science, 
+              and exploring applications of AI/ML in real-world systems. 
+
+              Outside of academics, I enjoy holing up in my room and reading books. 
+              I aim to grow into roles that let me combine software engineering with applied machine learning.`,
+      skills: ["Python","JavaScript", "SQL", "Machine Learning"],
       links: [
         { label: "GitHub", href: "https://github.com/your-username" },
         { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle/" },
@@ -102,12 +103,8 @@
       ],
       details: [
         { k: "Location", v: "Charlotte, NC" },
-        { k: "Currently", v: "Building a lip‑sync demo" },
-        { k: "Looking for", v: "TA/RA or internship roles" }
-      ],
-      projects: [
-        { name: "Wav2Lip Web App", desc: "Streamlit app with login & file uploads to sync lip movement to speech.", url: "#" },
-        { name: "FastAPI Orders API", desc: "CRUD service using SQLAlchemy & JWT auth.", url: "#" }
+        { k: "Education", v: "MS in Computer Science, UNCC" },
+        { k: "Interests", v: "VA, ML, Web Apps" }
       ]
     };
 
@@ -142,13 +139,6 @@
     data.details.forEach(d => detailsWrap.appendChild(el('div', { class: 'item' }, [
       el('strong', {}, d.k),
       el('span', {}, d.v)
-    ])));
-
-    // Projects list
-    const projectsWrap = document.getElementById('projects');
-    data.projects.forEach(p => projectsWrap.appendChild(el('a', { class: 'item', href: p.url, target: '_blank', rel: 'noopener' }, [
-      el('strong', {}, p.name),
-      el('span', {}, p.desc)
     ])));
   </script>
 </body>
